@@ -1,0 +1,31 @@
+{
+  "name": "dicom2ion",
+  "version": "1.0.0",
+  "description": "JavaScript implementation of a DICOM P10 converter to Ion",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --recursive --trace-warnings --unhandled-rejections=strict"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chafey/dicom2ion-js.git"
+  },
+  "keywords": [
+    "DICOM",
+    "Ion"
+  ],
+  "author": "Chris Hafey <chafey@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chafey/dicom2ion-js/issues"
+  },
+  "homepage": "https://github.com/chafey/dicom2ion-js#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  },
+  "dependencies": {
+    "dicom-parser": "^1.8.7",
+    "ion-js": "^4.1.0",
+    "jsbi": "^3.1.4"
+  }
+}
