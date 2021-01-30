@@ -34,12 +34,12 @@ const inlineDataSet = (dataSet) => {
         } else {
             // non sequence item
             if(attr.length < 256) {
-                inlinedAttr.data = dataSet.byteArray.slice(attr.dataOffset, attr.length)
+                inlinedAttr.data = new Uint8Array(dataSet.byteArray.slice(attr.dataOffset, attr.dataOffset + attr.length))
             } else {
                 inlinedAttr.dataOffset = attr.dataOffset
             }
         }
-        console.log(inlinedAttr)
+        //console.log(inlinedAttr)
         return inlinedAttr
     })
     return inlineDataSet
@@ -60,7 +60,7 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
     // parse the dicom file
     const dataSet = dicomParser.parseDicom(buffer)
 
-    console.log(dataSet)
+    //console.log(dataSet.byteArray.buffer)
 
     const inlinedDataSet = inlineDataSet(dataSet)
 
@@ -70,7 +70,9 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
         dataSet: inlinedDataSet
     }
 
-    return output
+    let ionText = ion.dumpText(output);
+
+    return ionText
 }
 
 module.exports = dicom2ion

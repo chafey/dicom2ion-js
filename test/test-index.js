@@ -24,7 +24,7 @@ describe('index', async () => {
 
         // Act
         const ion = await dicom2ion(readStream)
-        //console.log(ion)
+        console.log(ion)
 
         // Assert
         assert.notStrictEqual(ion, undefined)
