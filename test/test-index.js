@@ -1,19 +1,33 @@
 const assert = require('assert')
-const index = require('./../src/index')
+const dicom2ion = require('./../src/index')
+const fs = require('fs')
 
 describe('index', async () => {
 
     before(async() => {
     })
 
-    it('get returns pending promise', async () => {
+    it('exports', async () => {
         // Arrange
-        //const blockBuffer = createBlockBuffer()
 
         // Act
-        //const promise = blockBuffer.get(helloWorld.cid)
 
         // Assert
-        //assert.strictEqual(await isPending(promise), true)
+        assert.notStrictEqual(dicom2ion, undefined)
     })
+
+    it('exports', async () => {
+        // Arrange
+        const sourceUri = 'test/fixtures/CT1_UNC'
+        const readStream = fs.createReadStream(sourceUri);
+        //const writeStream = fs.createWrite
+
+        // Act
+        const ion = await dicom2ion(readStream)
+        //console.log(ion)
+
+        // Assert
+        assert.notStrictEqual(ion, undefined)
+    })
+
 })

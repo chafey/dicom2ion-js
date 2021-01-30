@@ -3,7 +3,7 @@ JavaScript implementation of a DICOM P10 converter to Ion
 
 ## Input Parameters
 - URI to source DICOM P10 file
-- URI to to output Ion file
+- URI to output Ion file
 - Encoding Algorithm Parameters (optional)
   - privateAttributeMaxInlineLength - defaults to 256
   - standardAttributeMaxInlineLength - defaults to 256
