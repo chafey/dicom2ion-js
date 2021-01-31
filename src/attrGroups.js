@@ -1,4 +1,5 @@
 
+// TODO: Create a tool to generate this based on the DICOM Standard from https://github.com/innolitics/dicom-standard
 
 const uidAttrs = new Map([
     ['00080016', 'SOPClassUID'],

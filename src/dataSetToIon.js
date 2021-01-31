@@ -1,6 +1,7 @@
 const dicomParser = require('dicom-parser');
 const attrToIon = require('./attrToIon')
 const attrGroups = require('./attrGroups')
+const getVR = require('./getVR')
 
 const dataSetToIon = (dataSet) => {
     const sortedKeys = Object.keys(dataSet.elements).sort()
@@ -22,7 +23,10 @@ const dataSetToIon = (dataSet) => {
             if (dicomParser.isPrivateTag(attr.tag)) {
                 ionDataSet.vrs[tag] = attr.vr
             }
-            // TODO: add VR's for those that match multiple or are not in data dictionary
+            const vr = getVR(attr)
+            if(vr === 'UN' || vr.includes('|')) {
+                ionDataSet.vrs[tag] = attr.vr
+            }
         }
 
         let found = false

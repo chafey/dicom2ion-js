@@ -1,5 +1,7 @@
 const getVR = require('./getVR')
 
+// TODO: investigate DICOM Supp 219 to see if we can align
+
 const attrStringDataToIon = (dataSet, attr) => {
     return dataSet.string(attr.tag)
 }
