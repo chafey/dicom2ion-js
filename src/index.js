@@ -165,9 +165,10 @@ const uidAttrs = new Map([
     ['00080016', 'SOPClassUID'],
     ['00080018', 'SOPInstanceUID'],
     ['0020000d', 'StudyUID'],
-    ['0020000d', 'SeriesUID'],
+    ['0020000e', 'SeriesUID'],
     ['00020010', 'TransferSyntaxUID'],
     ['00200052', 'FrameOfReferenceUID'],
+    ['00080014', 'InstanceCreatorUID'],
 ])
 
 const patientAttrs = new Map([
@@ -199,10 +200,13 @@ const seriesAttrs = new Map([
 const instanceAttrs = new Map([
     ['00200013', 'InstanceNumber'],
     ['00200012', 'AcquisitionNumber'],
+    ['00080012', 'InstanceCreationDate'],
+    ['00080013', 'InstanceCreationTime'],
     ['00080022', 'AcquisitionDate'],
-    ['00080023', 'AcquisitionTime'],
+    ['00080032', 'AcquisitionTime'],
     ['00080023', 'ContentDate'],
     ['00080033', 'ContentTime'],
+    ['00080005', 'SpecificCharacterSet']
 ])
 
 const imageAttrs = new Map([
