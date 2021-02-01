@@ -148,14 +148,14 @@ const attrDataToIon = (dataSet, attr) => {
     }
 }
 
-const attrToIon = (dataSet, attr, dataSetToIon) => {
+const attrToIon = (dataSet, attr, dataSetToIon, depth) => {
     if(attr.tag === 'x7fe00010') {
         return attrPixelDataToIon(dataSet, attr)
     }
     if(attr.items) {
         // sequences
         return attr.items.map((item) => {
-            return dataSetToIon(item.dataSet)
+            return dataSetToIon(item.dataSet, depth+1)
         })
     } else {
         // non sequence item

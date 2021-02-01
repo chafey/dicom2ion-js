@@ -3,7 +3,7 @@ const attrToIon = require('./attrToIon')
 const attrGroups = require('./attrGroups')
 const getVR = require('./getVR')
 
-const dataSetToIon = (dataSet) => {
+const dataSetToIon = (dataSet, depth=0) => {
     const ionDataSet = {
         groups: {
         },
@@ -35,23 +35,26 @@ const dataSetToIon = (dataSet) => {
             }
         }
 
+        // only normalize for root depth (not sequences)
         let found = false
-        Object.keys(attrGroups).map((key) => {
-            const group = attrGroups[key]
-            if(group.has(tag)) {
-                if(ionDataSet.groups[key] === undefined) {
-                    ionDataSet.groups[key] = {}
+        if(depth === 0) {
+            Object.keys(attrGroups).map((key) => {
+                const group = attrGroups[key]
+                if(group.has(tag)) {
+                    if(ionDataSet.groups[key] === undefined) {
+                        ionDataSet.groups[key] = {}
+                    }
+                    ionDataSet.groups[key][group.get(tag)] = attrToIon(dataSet, attr, dataSetToIon, depth)
+                    found = true
                 }
-                ionDataSet.groups[key][group.get(tag)] = attrToIon(dataSet, attr, dataSetToIon)
-                found = true
-            }
-        })
+            })
+        }
 
         if(found === false) {
             if(dicomParser.isPrivateTag(attr.tag)) {
-                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon)
+                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon, depth)
             } else {
-                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon)
+                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon, depth)
             }
         }
     })
@@ -73,7 +76,6 @@ const dataSetToIon = (dataSet) => {
     if(Object.keys(ionDataSet.groups).length === 0){
         delete ionDataSet.groups
     }
-
 
     return ionDataSet
 }
