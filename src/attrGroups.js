@@ -79,12 +79,12 @@ const equipmentAttrs = new Map([
 
 const attrGroups = {
     uidAttrs,
+    imageAttrs,
     patientAttrs,
     studyAttrs,
     seriesAttrs,
     instanceAttrs,
     equipmentAttrs,
-    imageAttrs
 }
 
 module.exports = attrGroups

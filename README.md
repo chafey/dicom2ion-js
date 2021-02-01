@@ -54,7 +54,7 @@ https://amzn.github.io/ion-docs/guides/why.html
 
 ### Example Output
 ```
-{{
+{
   fileInfo: {
   },
   dataSet: {
@@ -67,25 +67,6 @@ https://amzn.github.io/ion-docs/guides/why.html
         StudyUID: "1.3.6.1.4.1.5962.1.2.1.20040826185059.5457",
         SeriesUID: "1.3.6.1.4.1.5962.1.3.1.1.20040826185059.5457",
         FrameOfReferenceUID: "1.3.6.1.4.1.5962.1.4.1.1.20040826185059.5457"
-      },
-      equipmentAttrs: {
-        ImplementationVersionName: "DCTOOL100",
-        AETitle: "CLUNIE1",
-        Manufacturer: "GE MEDICAL SYSTEMS",
-        SoftwareVersion: "JFK IMAGING CENTER",
-        StationName: "CT01_OC0",
-        Model: "RHAPSODE"
-      },
-      instanceAttrs: {
-        SpecificCharacterSet: "ISO_IR 100",
-        InstanceCreationDate: "20040826",
-        InstanceCreationTime: "185100",
-        AcquisitionDate: "19970430",
-        ContentDate: "19970430",
-        AcquisitionTime: "112936",
-        ContentTime: "113008",
-        AcquisitionNumber: "2",
-        InstanceNumber: "1"
       },
       imageAttrs: {
         ImageType: "ORIGINAL\\PRIMARY\\AXIAL",
@@ -103,6 +84,12 @@ https://amzn.github.io/ion-docs/guides/why.html
         RescaleIntercept: "-1024",
         RescaleSlope: "1"
       },
+      patientAttrs: {
+        PatientName: "CompressedSamples^CT1",
+        PatientId: "1CT1",
+        PatientBirthDate: null,
+        PatientSex: "O"
+      },
       studyAttrs: {
         StudyDate: "20040826",
         StudyTime: "185059",
@@ -116,11 +103,24 @@ https://amzn.github.io/ion-docs/guides/why.html
         Modality: "CT",
         SeriesNumber: "1"
       },
-      patientAttrs: {
-        PatientName: "CompressedSamples^CT1",
-        PatientId: "1CT1",
-        PatientBirthDate: null,
-        PatientSex: "O"
+      instanceAttrs: {
+        SpecificCharacterSet: "ISO_IR 100",
+        InstanceCreationDate: "20040826",
+        InstanceCreationTime: "185100",
+        AcquisitionDate: "19970430",
+        ContentDate: "19970430",
+        AcquisitionTime: "112936",
+        ContentTime: "113008",
+        AcquisitionNumber: "2",
+        InstanceNumber: "1"
+      },
+      equipmentAttrs: {
+        ImplementationVersionName: "DCTOOL100",
+        AETitle: "CLUNIE1",
+        Manufacturer: "GE MEDICAL SYSTEMS",
+        SoftwareVersion: "JFK IMAGING CENTER",
+        StationName: "CT01_OC0",
+        Model: "RHAPSODE"
       }
     },
     standardAttrs: {

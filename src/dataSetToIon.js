@@ -4,7 +4,6 @@ const attrGroups = require('./attrGroups')
 const getVR = require('./getVR')
 
 const dataSetToIon = (dataSet) => {
-    const sortedKeys = Object.keys(dataSet.elements).sort()
     const ionDataSet = {
         groups: {
         },
@@ -13,6 +12,13 @@ const dataSetToIon = (dataSet) => {
         vrs: {}
     }
 
+    // add objects for each attribute group to the ionDataSet so we can control the order
+    Object.keys(attrGroups).map((key) => {
+        ionDataSet.groups[key] = {}
+    })
+    
+    // iterate through the attributes in the dataset and map them to ion
+    const sortedKeys = Object.keys(dataSet.elements).sort()
     sortedKeys.map((key) => {
         const attr = dataSet.elements[key]
         //console.log('attr=',attr)
