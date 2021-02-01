@@ -61,12 +61,15 @@ const attrFDDataToIon = (dataSet, attr) => {
 const attrDataRefToIon = (dataSet, attr) => {
     const data = new Uint8Array(dataSet.byteArray.buffer, attr.dataOffset, attr.length)
     const digest = getHash(data)
-    return {
+    const result = {
         dataOffset: attr.dataOffset,
         length: attr.length,
-        vr: attr.vr,
         sha256: digest
-    }   
+    }
+    if(attr.vr) {
+        result.vr = attr.vr
+    }
+    return result
 }
 
 const attrATDataToIon = (dataSet, attr) => {

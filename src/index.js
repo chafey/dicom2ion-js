@@ -4,7 +4,8 @@ const asyncIterableToBuffer = require('./asyncIterableToBuffer')
 const defaultOptions = require('./defaultOptions')
 const dataSetToIon = require('./dataSetToIon')
 const getHash = require('./getHash')
-
+const fs = require('fs')
+const util = require('util')
 
 /**
  * 
@@ -36,6 +37,12 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
         },
         dataSet: inlinedDataSet
     }
+
+    //console.log(JSON.stringify(output, null, 4));
+    //console.log(output)
+    //console.log(util.inspect(output, {showHidden: false, depth: null}))
+
+    //fs.writeFileSync('output.json', util.inspect(output, {showHidden: false, depth: null}))
 
     console.time('encode ion')
     let ionText = ion.dumpPrettyText(output)

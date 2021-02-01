@@ -6,7 +6,7 @@
  * https://github.com/grmble/node-dicom
  */
 
-var TAG_DICT = {
+module.exports = {
     '00000000': {'tag': '00000000', 'vr': 'UL', 'vm': '1', 'name': 'CommandGroupLength'},
     '00000001': {'tag': '00000001', 'vr': 'UL', 'vm': '1', 'name': 'CommandLengthToEnd'},
     '00000002': {'tag': '00000002', 'vr': 'UI', 'vm': '1', 'name': 'AffectedSOPClassUID'},

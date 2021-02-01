@@ -4,8 +4,9 @@ const getVR = (attr) => {
     if(attr.vr) {
         return attr.vr
     }
-    // TODO lookup in data dictionary
-    const dataDictAttr = dataDictionary[attr.tag.substring(1)]
+    // lookup the vr using the data dictionary
+    const tag = attr.tag.substring(1).toUpperCase()
+    const dataDictAttr = dataDictionary[tag]
     if(dataDictAttr) {
         return dataDictAttr.vr
     }
