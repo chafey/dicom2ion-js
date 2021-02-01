@@ -20,7 +20,9 @@ describe('index', async () => {
         // Arrange
         //const sourceUri = 'test/fixtures/CT1_UNC'
         //const sourceUri = 'test/fixtures/CT1_UNC.implicit_little_endian.dcm'
-        const sourceUri = 'test/fixtures/CT0012.explicit_little_endian.dcm'
+        //const sourceUri = 'test/fixtures/CT0012.explicit_little_endian.dcm'
+        //const sourceUri = 'test/fixtures/CT0012.fragmented_no_bot_jpeg_ls.80.dcm'
+        const sourceUri = 'test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm'
         const readStream = fs.createReadStream(sourceUri);
         //const writeStream = fs.createWrite
 

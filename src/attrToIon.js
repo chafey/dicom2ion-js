@@ -80,10 +80,26 @@ const attrATDataToIon = (dataSet, attr) => {
     return groupHexStr + elementHexStr
 }
 
+const attrPixelDataToIon = (dataSet, attr) => {
+    console.log(attr)
+    const result = attrDataRefToIon(dataSet, attr)
+    if(attr.fragments) {
+        result.fragments = attr.fragments
+    }
+    if(attr.basicOffsetTable) {
+        result.basicOffsetTable = attr.basicOffsetTable
+    }
+    if(attr.encapsulatedPixelData) {
+        result.encapsulatedPixelData = attr.encapsulatedPixelData
+    }
+    return result
+}
+
 const attrDataToIon = (dataSet, attr) => {
     if(attr.length == 0) {
         return null
     }
+    
     const vr = getVR(attr)
     switch(vr) {
         case 'AE': 
@@ -133,6 +149,9 @@ const attrDataToIon = (dataSet, attr) => {
 }
 
 const attrToIon = (dataSet, attr, dataSetToIon) => {
+    if(attr.tag === 'x7fe00010') {
+        return attrPixelDataToIon(dataSet, attr)
+    }
     if(attr.items) {
         // sequences
         return attr.items.map((item) => {
