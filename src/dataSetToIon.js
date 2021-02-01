@@ -42,19 +42,39 @@ const dataSetToIon = (dataSet) => {
                 if(ionDataSet.groups[key] === undefined) {
                     ionDataSet.groups[key] = {}
                 }
-                ionDataSet.groups[key][group.get(tag)] = attrToIon(dataSet, attr)
+                ionDataSet.groups[key][group.get(tag)] = attrToIon(dataSet, attr, dataSetToIon)
                 found = true
             }
         })
 
         if(found === false) {
             if(dicomParser.isPrivateTag(attr.tag)) {
-                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr)
+                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon)
             } else {
-                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr)
+                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon)
             }
         }
     })
+
+    if(Object.keys(ionDataSet.privateAttrs).length === 0){
+        delete ionDataSet.privateAttrs
+    }
+    if(Object.keys(ionDataSet.standardAttrs).length === 0){
+        delete ionDataSet.standardAttrs
+    }
+    if(Object.keys(ionDataSet.vrs).length === 0){
+        delete ionDataSet.vrs
+    }
+    Object.keys(ionDataSet.groups).map((key) => {
+        if(Object.keys(ionDataSet.groups[key]).length === 0){
+            delete ionDataSet.groups[key]
+        }
+    })
+    if(Object.keys(ionDataSet.groups).length === 0){
+        delete ionDataSet.groups
+    }
+
+
     return ionDataSet
 }
 

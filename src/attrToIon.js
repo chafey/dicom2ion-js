@@ -132,9 +132,12 @@ const attrDataToIon = (dataSet, attr) => {
     }
 }
 
-const attrToIon = (dataSet, attr) => {
+const attrToIon = (dataSet, attr, dataSetToIon) => {
     if(attr.items) {
-        // sequnces
+        // sequences
+        return attr.items.map((item) => {
+            return dataSetToIon(item.dataSet)
+        })
     } else {
         // non sequence item
         if(attr.length < 256) {
