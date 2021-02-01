@@ -6,11 +6,11 @@ const getVR = require('./getVR')
 const dataSetToIon = (dataSet) => {
     const sortedKeys = Object.keys(dataSet.elements).sort()
     const ionDataSet = {
-        vrs: {},
         groups: {
-            standardAttrs: {},
-            privateAttrs: {}
-        }
+        },
+        standardAttrs: {},
+        privateAttrs: {},
+        vrs: {}
     }
 
     sortedKeys.map((key) => {
@@ -43,9 +43,9 @@ const dataSetToIon = (dataSet) => {
 
         if(found === false) {
             if(dicomParser.isPrivateTag(attr.tag)) {
-                ionDataSet.groups.privateAttrs[tag] = attrToIon(dataSet, attr)
+                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr)
             } else {
-                ionDataSet.groups.standardAttrs[tag] = attrToIon(dataSet, attr)
+                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr)
             }
         }
     })
