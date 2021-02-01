@@ -1,4 +1,5 @@
 const getVR = require('./getVR')
+const getHash = require('./getHash')
 
 // TODO: investigate DICOM Supp 219 to see if we can align
 
@@ -59,10 +60,13 @@ const attrFDDataToIon = (dataSet, attr) => {
 
 const attrDataRefToIon = (dataSet, attr) => {
 
+    const digest = getHash(dataSet.byteArray.slice(attr.dataOffset, attr.dataOffset + attr.length).buffer)
+
     return {
         dataOffset: attr.dataOffset,
         length: attr.length,
-        vr: attr.vr
+        vr: attr.vr,
+        sha256: digest
     }   
 }
 

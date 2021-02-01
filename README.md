@@ -58,6 +58,7 @@ https://amzn.github.io/ion-docs/guides/why.html
 ```javascript
 {
   fileInfo: {
+    sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6"
   },
   dataSet: {
     groups: {
@@ -164,7 +165,8 @@ https://amzn.github.io/ion-docs/guides/why.html
       '7fe00010': {
         dataOffset: 6206,
         length: 524288,
-        vr: "OW"
+        vr: "OW",
+        sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6"
       },
       fffcfffc: {{CgD+AAQAAQAAAAAAAAAAAQQAAQAAAAACAAABAQQAAQAAAAACAAACAQMAAQAAABAAAAADAQMAAQAAAAEAAAAGAQMAAQAAAAEAAAARAQQAAQAAAD4YAAAVAQMAAQAAAAEAAAAWAQQAAQAAAAACAAAXAQQAAQAAAAAACAAAAAAA}}
     },
@@ -332,7 +334,8 @@ https://amzn.github.io/ion-docs/guides/why.html
       '00431029': {
         dataOffset: 3854,
         length: 2068,
-        vr: "OB"
+        vr: "OB",
+        sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6"
       },
       '0043102a': {{Q1QwMQAAAEhpU3BlZWQgQ1QvaQAwNTA1ejo9fAAAAAAAAAAAAAAAAA==}},
       '0043102b': {{BAAEAAAAAAA=}},

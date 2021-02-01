@@ -3,6 +3,8 @@ const ion = require("ion-js");
 const asyncIterableToBuffer = require('./asyncIterableToBuffer')
 const defaultOptions = require('./defaultOptions')
 const dataSetToIon = require('./dataSetToIon')
+const getHash = require('./getHash')
+
 
 /**
  * 
@@ -16,6 +18,9 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
     // read into a buffer since dicomParser does not support streaming
     const buffer = await asyncIterableToBuffer(readable)
 
+    // calculate the sha 256 hash
+    let digest = getHash(buffer.buffer);
+
     // parse the dicom file
     console.time('parse dicom')
     const dataSet = dicomParser.parseDicom(buffer)
@@ -27,6 +32,7 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
 
     const output = {
         fileInfo: {
+            sha256: digest
         },
         dataSet: inlinedDataSet
     }
