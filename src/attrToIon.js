@@ -59,9 +59,8 @@ const attrFDDataToIon = (dataSet, attr) => {
 }
 
 const attrDataRefToIon = (dataSet, attr) => {
-
-    const digest = getHash(dataSet.byteArray.slice(attr.dataOffset, attr.dataOffset + attr.length).buffer)
-
+    const data = new Uint8Array(dataSet.byteArray.buffer, attr.dataOffset, attr.length)
+    const digest = getHash(data)
     return {
         dataOffset: attr.dataOffset,
         length: attr.length,

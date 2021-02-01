@@ -11,7 +11,8 @@ function toHexString(byteArray) {
 
 const getHash = (data) => {
     const digest = ionHash.digest(data, 'sha256');
-    return toHexString(digest)
+    const hexString = toHexString(digest)
+    return hexString
 }
 
 module.exports = getHash
