@@ -55,7 +55,7 @@ https://amzn.github.io/ion-docs/guides/why.html
   - these can be very large (e.g. LUTs) and rarely need to be human readable
 
 ### Example Output
-```json
+```javascript
 {
   fileInfo: {
   },
