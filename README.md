@@ -58,6 +58,15 @@ https://amzn.github.io/ion-docs/guides/why.html
 ### Example Output
 ```javascript
 {
+  sourceInfo: {
+    uri: "file:///workspaces/dicom2ion-js/test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm"
+  },
+  options: {
+    maximumInlineDataLength: {
+      standard: 256,
+      private: 256
+    }
+  },
   fileInfo: {
     sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6"
   },

@@ -10,11 +10,11 @@ const util = require('util')
 /**
  * 
  * @param {*} readable - async iterator source
- * @param {*} sourceUri 
+ * @param {*} sourceInfo 
  * @param {*} options 
  */
 
-const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
+const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
 
     // read into a buffer since dicomParser does not support streaming
     const buffer = await asyncIterableToBuffer(readable)
@@ -32,6 +32,8 @@ const dicom2ion = async (readable, sourceUri, options = defaultOptions) => {
     const inlinedDataSet = dataSetToIon(dataSet)
 
     const output = {
+        sourceInfo,
+        options,
         fileInfo: {
             sha256: digest
         },
