@@ -81,7 +81,6 @@ const attrATDataToIon = (dataSet, attr) => {
 }
 
 const attrPixelDataToIon = (dataSet, attr) => {
-    console.log(attr)
     const result = attrDataRefToIon(dataSet, attr)
     if(attr.fragments) {
         result.fragments = attr.fragments

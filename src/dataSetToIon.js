@@ -2,6 +2,7 @@ const dicomParser = require('dicom-parser');
 const attrToIon = require('./attrToIon')
 const attrGroups = require('./attrGroups')
 const getVR = require('./getVR')
+const getKeyword = require('./getKeyword')
 
 const dataSetToIon = (dataSet, depth=0) => {
     const ionDataSet = {
@@ -35,6 +36,8 @@ const dataSetToIon = (dataSet, depth=0) => {
             }
         }
 
+        const keyword = getKeyword(attr)
+
         // only normalize for root depth (not sequences)
         let found = false
         if(depth === 0) {
@@ -44,7 +47,7 @@ const dataSetToIon = (dataSet, depth=0) => {
                     if(ionDataSet.groups[key] === undefined) {
                         ionDataSet.groups[key] = {}
                     }
-                    ionDataSet.groups[key][group.get(tag)] = attrToIon(dataSet, attr, dataSetToIon, depth)
+                    ionDataSet.groups[key][keyword] = attrToIon(dataSet, attr, dataSetToIon, depth)
                     found = true
                 }
             })
@@ -54,7 +57,7 @@ const dataSetToIon = (dataSet, depth=0) => {
             if(dicomParser.isPrivateTag(attr.tag)) {
                 ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon, depth)
             } else {
-                ionDataSet.standardAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon, depth)
+                ionDataSet.standardAttrs[keyword] = attrToIon(dataSet, attr, dataSetToIon, depth)
             }
         }
     })
