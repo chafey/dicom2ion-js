@@ -26,7 +26,8 @@ https://amzn.github.io/ion-docs/guides/why.html
 - Group related attributes together (e.g. patient, study, series, instance groups) to improve read/access/parse times (and human comprehension)
 - Organize groups in the order of most frequently used (uids first, patient details next, etc)
 - Must be possible to regenerate DICOM P10 from ION Format.  Ideally bit for bit lossless, but semantic equivalence is acceptable
-- 
+- Store the sha256 digest of the original DICOM P10 so we can very integrity later
+- Store the sha256 for each referenced data item so we can verify integrity later
 
 ### Input Parameters
 - Stream to source DICOM P10
