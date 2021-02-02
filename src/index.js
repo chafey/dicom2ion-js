@@ -23,9 +23,7 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
     let digest = getHash(buffer.buffer);
 
     // parse the dicom file
-    console.time('parse dicom')
     const dataSet = dicomParser.parseDicom(buffer)
-    console.timeEnd('parse dicom')
 
     const ionDataSet = dataSetToIon(dataSet, options)
 
@@ -38,18 +36,8 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
         },
         dataSet: ionDataSet
     }
-
-    //console.log(JSON.stringify(output, null, 4));
-    //console.log(output)
-    //console.log(util.inspect(output, {showHidden: false, depth: null}))
-
-    //fs.writeFileSync('output.json', util.inspect(output, {showHidden: false, depth: null}))
-
-    console.time('encode ion')
-    let ionText = ion.dumpPrettyText(output)
-    console.timeEnd('encode ion')
  
-    return ionText
+    return output
 }
 
 module.exports = dicom2ion

@@ -2,6 +2,7 @@ const assert = require('assert')
 const dicom2ion = require('./../src/index')
 const fs = require('fs')
 const path = require('path')
+const ion = require("ion-js");
 
 describe('index', async () => {
 
@@ -19,11 +20,11 @@ describe('index', async () => {
 
     it('exports', async () => {
         // Arrange
-        //const sourcePath = 'test/fixtures/CT1_UNC'
+        const sourcePath = 'test/fixtures/CT1_UNC'
         //const sourcePath = 'test/fixtures/CT1_UNC.implicit_little_endian.dcm'
         //const sourcePath = 'test/fixtures/CT0012.explicit_little_endian.dcm'
         //const sourcePath = 'test/fixtures/CT0012.fragmented_no_bot_jpeg_ls.80.dcm'
-        const sourcePath = 'test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm'
+        //const sourcePath = 'test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm'
         //const sourcePath = 'test/fixtures/I_000025.dcm'
         //const sourcePath = 'test/fixtures/IM00001.implicit_little_endian.dcm'
         const readStream = fs.createReadStream(sourcePath);
@@ -34,8 +35,11 @@ describe('index', async () => {
         }
 
         // Act
-        const ion = await dicom2ion(readStream, sourceInfo)
-        console.log(ion)
+        const output = await dicom2ion(readStream, sourceInfo)
+
+        let ionText = ion.dumpPrettyText(output)
+
+        console.log(ionText)
 
         // Assert
         assert.notStrictEqual(ion, undefined)
