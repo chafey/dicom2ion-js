@@ -1,5 +1,5 @@
 # dicom2ion-js
-JavaScript implementation of a DICOM P10 converter to Ion
+JavaScript implementation of a DICOM P10 converter to [Amazon Ion](https://amzn.github.io/ion-docs/)
 
 Project Status: pre-release software, do not use yet
 
@@ -16,36 +16,34 @@ Project Status: pre-release software, do not use yet
 Read more here:
 https://amzn.github.io/ion-docs/guides/why.html
 
-
 ## Design Thoughts:
 
 - Support async iterator as input so we can design for a full streaming implementation
 - Make the attribute->value as simple and lightweight as possible (basically TAG=VALUE)
 - Preserve the VRs in the original DICOM P10, but only the ones we don't already know (private vrs and multi-vr attributes)
 - Use human friendly (Keyword) names for attributes (rather than group/element)
-- Group related attributes together (e.g. patient, study, series, instance groups) to improve read/access/parse times (and human comprehension)
-- Organize groups in the order of most frequently used (uids first, patient details next, etc)
+- Order attributes so the most common ones are first
 - Must be possible to regenerate DICOM P10 from ION Format.  Ideally bit for bit lossless, but semantic equivalence is acceptable
 - Store the sha256 digest of the original DICOM P10 so we can very integrity later
 - Store the sha256 for each referenced data item so we can verify integrity later
 
 ### Input Parameters
 - Stream to source DICOM P10
-- Stream Info (optional)
+- Source Info (optional)
   - uri to source DICOM P10 file
   - creation date
   - modification date
 - Encoding Algorithm Parameters (optional)
   - privateAttributeMaxInlineLength - defaults to 256
   - standardAttributeMaxInlineLength - defaults to 256
+  - data dictionary to use
 
 ### Returns async interable stream with ion data
 
 ### Output Schema
-- Attribute Grouping
-  - Enables faster parsing/lookups as groups can be skipped
-  - Private attributes put in their own group
-  - Multiple groups allow enable easier reading/comprehension of data (patient name not mixed with photometric interpretation)
+- Attribute Ordering
+  - Enables faster parsing/lookups 
+  - Private attributes put at the end
 - Uses human readable names vs tags for common attribute groups
   - Easier to read/debug
 - Stores VRs separately from values
