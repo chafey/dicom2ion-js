@@ -10,7 +10,7 @@ const getVR = (attr) => {
     if(dataDictAttr) {
         return dataDictAttr.vr
     }
-    return "UN"
+    return undefined
 }
 
 module.exports = getVR

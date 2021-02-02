@@ -7,11 +7,13 @@ const orderedAttributes = require('./orderedAttributes');
 const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr, options) => {
     // store vrs separately from attribute values
     if(attr.vr) {
+        // Always store the VR for private tags
         if (dicomParser.isPrivateTag(attr.tag)) {
             vrs[tag] = attr.vr
         }
         const vr = getVR(attr)
-        if(vr === 'UN' || vr.includes('|')) {
+        // Always store the VR if it is unknown or is a multi-vr attribute (like LUT Data)
+        if(!vr || vr.includes('|')) {
             vrs[tag] = attr.vr
         }
     }

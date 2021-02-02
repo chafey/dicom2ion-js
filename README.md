@@ -68,7 +68,7 @@ https://amzn.github.io/ion-docs/guides/why.html
   },
   fileInfo: {
     sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6",
-    createdAt: 2021-02-02T10:22:10.333Z
+    createdAt: 2021-02-02T10:28:42.849Z
   },
   dataSet: {
     StudyInstanceUID: "1.3.6.1.4.1.5962.1.2.10.1166562673.14401",
@@ -109,6 +109,11 @@ https://amzn.github.io/ion-docs/guides/why.html
       dataOffset: 3920,
       length: 85608,
       sha256: "fc003556dfa33c59e59a9575f2eb8ed4a7cb5349a7159d0abf85fd8ab7948a6b",
+      encapsulatedPixelData: true,
+      basicOffsetTable: [
+        0,
+        46416
+      ],
       fragments: [
         {
           offset: 0,
@@ -120,12 +125,7 @@ https://amzn.github.io/ion-docs/guides/why.html
           position: 50360,
           length: 39160
         }
-      ],
-      basicOffsetTable: [
-        0,
-        46416
-      ],
-      encapsulatedPixelData: true
+      ]
     },
     PhotometricInterpretation: "MONOCHROME2",
     FrameOfReferenceUID: "1.3.6.1.4.1.5962.1.4.10.1.1166562673.14401",

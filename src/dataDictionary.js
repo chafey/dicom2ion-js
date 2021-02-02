@@ -1,5 +1,7 @@
 "use strict";
 
+// TODO: Update this based on https://github.com/innolitics/dicom-standard
+// TODO: Create a versioning mechanism so we can reference them by sha256 digest
 
 /*
  * Based on version at node-dicom

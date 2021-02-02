@@ -79,14 +79,14 @@ const attrATDataToIon = (dataSet, attr) => {
 
 const attrPixelDataToIon = (dataSet, attr) => {
     const result = attrDataRefToIon(dataSet, attr)
-    if(attr.fragments) {
-        result.fragments = attr.fragments
+    if(attr.encapsulatedPixelData) {
+        result.encapsulatedPixelData = attr.encapsulatedPixelData
     }
     if(attr.basicOffsetTable) {
         result.basicOffsetTable = attr.basicOffsetTable
     }
-    if(attr.encapsulatedPixelData) {
-        result.encapsulatedPixelData = attr.encapsulatedPixelData
+    if(attr.fragments) {
+        result.fragments = attr.fragments
     }
     return result
 }
