@@ -6,7 +6,7 @@ const dataSetToIon = require('./dataSetToIon')
 const getHash = require('./getHash')
 const fs = require('fs')
 const util = require('util')
-
+const timestampNow = require('./timestampNow')
 /**
  * 
  * @param {*} readable - async iterator source
@@ -27,15 +27,14 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
     const dataSet = dicomParser.parseDicom(buffer)
     console.timeEnd('parse dicom')
 
-    //console.log(dataSet.byteArray.buffer)
-
     const inlinedDataSet = dataSetToIon(dataSet)
 
     const output = {
         sourceInfo,
         options,
         fileInfo: {
-            sha256: digest
+            sha256: digest,
+            createdAt: timestampNow()
         },
         dataSet: inlinedDataSet
     }
