@@ -4,7 +4,7 @@ const getVR = require('./getVR')
 const getKeyword = require('./getKeyword');
 const orderedAttributes = require('./orderedAttributes');
 
-const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr) => {
+const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr, options) => {
     // store vrs separately from attribute values
     if(attr.vr) {
         if (dicomParser.isPrivateTag(attr.tag)) {
@@ -19,13 +19,13 @@ const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr) => {
     const keyword = getKeyword(attr)
 
     if(dicomParser.isPrivateTag(attr.tag)) {
-        ionDataSet[tag] = attrToIon(dataSet, attr, dataSetToIon)
+        ionDataSet[tag] = attrToIon(dataSet, attr, dataSetToIon, options)
     } else {
-        ionDataSet[keyword] = attrToIon(dataSet, attr, dataSetToIon)
+        ionDataSet[keyword] = attrToIon(dataSet, attr, dataSetToIon, options)
     }
 }
 
-const dataSetToIon = (dataSet) => {
+const dataSetToIon = (dataSet, options) => {
 
     const ionDataSet = {}
     const vrs = {}
@@ -35,7 +35,7 @@ const dataSetToIon = (dataSet) => {
     orderedAttributes.map((tag) => {
         const attr = dataSet.elements['x' + tag]
         if(attr) {
-            attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
+            attributeToIon(ionDataSet, vrs, tag, dataSet, attr, options)
         }
     })
 
@@ -52,9 +52,9 @@ const dataSetToIon = (dataSet) => {
         }
 
         if(dicomParser.isPrivateTag(attr.tag)) {
-            attributeToIon(privateAttributes, vrs, tag, dataSet, attr)
+            attributeToIon(privateAttributes, vrs, tag, dataSet, attr, options)
         } else {
-            attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
+            attributeToIon(ionDataSet, vrs, tag, dataSet, attr, options)
         }
 
     })

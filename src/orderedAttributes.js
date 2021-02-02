@@ -1,12 +1,11 @@
 const orderedAttributes = [
     // UIDS
-    '00080016', // SOP Class UID
-    '00080018', // SOP Instance UID
     '0020000d', // Study UID
     '0020000e', // Series UID
-    '00020010', // TransferSyntaxUID
-    '00200052', // FrameOfReferenceUID
-    '00080014', // InstanceCreatorUID
+    '00080018', // SOP Instance UID
+    // INSTANCE
+    '00080016', // SOP Class UID
+    '00080005', //'SpecificCharacterSet'
     // PATIENT
     '00100010', //'PatientName'],
     '00100020', //'PatientId'],
@@ -35,22 +34,33 @@ const orderedAttributes = [
     '00080032', //'AcquisitionTime'],
     '00080023', //'ContentDate'],
     '00080033', //'ContentTime'],
-    '00080005', //'SpecificCharacterSet']
+    '00080008', //'ImageType'],
+
     // IMAGE
     '00280010', //'Rows'],
     '00280011', //'Columns'],
-    '00280004', //'PhotometricInterpretation'],
-    '00080008', //'ImageType'],
     '00280100', //'BitsAllocated'],
     '00280101', //'BistStored'],
     '00280102', //'HighBit'],
     '00280103', //'PixelRepresentation'],
+    '00280002', //'SamplesPerPixel'],
+    '00020010', // TransferSyntaxUID
+    '7fe00010', // PixelData
+
+    // Display Pipeline Related
+    '00280120', // PixelPaddingValue
+    '00280004', //'PhotometricInterpretation'],
     '00281053', //'RescaleSlope'],
     '00281052', //'RescaleIntercept'],
+    '00281050', // window center
+    '00281051', // window width
+
+    // IMAGE SPATIAL
+    '00200052', // FrameOfReferenceUID
     '00200032', //'ImagePositionPatient'],
     '00200037', //'ImageOrientationPatient'],
     '00280030', //'PixelSpacing'],
-    '00280002', //'SamplesPerPixel'],
+
     // EQUIPMENT
     '00080070', //'Manufacturer'],
     '00081090', //'Model'],
@@ -59,8 +69,6 @@ const orderedAttributes = [
     '00080080', //'InstituionName'],
     '00080080', //'SoftwareVersion'],
     '00020013', //'ImplementationVersionName']
-    // PIXEL DATA
-    '7fe00010', // PIXEL DATA
 ]
 
 module.exports = orderedAttributes

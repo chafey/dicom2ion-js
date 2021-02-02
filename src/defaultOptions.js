@@ -1,7 +1,11 @@
+const getHash = require('./getHash')
+const dataDictionary = require('./dataDictionary')
+
 const defaultOptions = {
-    maximumInlineDataLength : {
-        standard: 256,
-        private: 256
+    maximumInlineDataLength: 256,
+    dataDictionary: {
+        description: "Unknown edition",
+        sha256: getHash(dataDictionary),
     }
 }
 

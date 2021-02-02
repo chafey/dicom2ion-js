@@ -27,7 +27,7 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
     const dataSet = dicomParser.parseDicom(buffer)
     console.timeEnd('parse dicom')
 
-    const ionDataSet = dataSetToIon(dataSet)
+    const ionDataSet = dataSetToIon(dataSet, options)
 
     const output = {
         sourceInfo,
