@@ -59,6 +59,8 @@ const orderedAttributes = [
     '00080080', //'InstituionName'],
     '00080080', //'SoftwareVersion'],
     '00020013', //'ImplementationVersionName']
+    // PIXEL DATA
+    '7fe00010', // PIXEL DATA
 ]
 
 module.exports = orderedAttributes

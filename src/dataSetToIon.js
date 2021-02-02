@@ -1,6 +1,5 @@
 const dicomParser = require('dicom-parser');
 const attrToIon = require('./attrToIon')
-const attrGroups = require('./attrGroups')
 const getVR = require('./getVR')
 const getKeyword = require('./getKeyword');
 const orderedAttributes = require('./orderedAttributes');
@@ -28,9 +27,9 @@ const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr) => {
 
 const dataSetToIon = (dataSet) => {
 
-    const vrs = {}
-
     const ionDataSet = {}
+    const vrs = {}
+    const privateAttributes = {}
    
     // do ordered attributes first
     orderedAttributes.map((tag) => {
@@ -40,19 +39,32 @@ const dataSetToIon = (dataSet) => {
         }
     })
 
-    // iterate through the attributes in the dataset and map them to ion
-    const keys = Object.keys(dataSet.elements)
+    // iterate through the attributes in the dataset and map them if 
+    // they were not added above in the ordered attributes
+    const keys = Object.keys(dataSet.elements).sort()
     keys.map((key) => {
         const attr = dataSet.elements[key]
         const tag = attr.tag.substring(1) // trim leading 'x'
  
+        // skip over any ordered attribute as those are already processed
         if(orderedAttributes.includes(tag)) {
             return
         }
 
-        attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
+        if(dicomParser.isPrivateTag(attr.tag)) {
+            attributeToIon(privateAttributes, vrs, tag, dataSet, attr)
+        } else {
+            attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
+        }
+
     })
 
+    // merge in the private attributes so they follow the standard ones
+    Object.keys(privateAttributes).map((key) => {
+        ionDataSet[key] = privateAttributes[key]
+    })
+
+    // add in vrs if they are present
     if(Object.keys(vrs).length != 0){
         ionDataSet._vrs = vrs
     }

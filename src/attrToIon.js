@@ -66,9 +66,6 @@ const attrDataRefToIon = (dataSet, attr) => {
         length: attr.length,
         sha256: digest
     }
-    if(attr.vr) {
-        result.vr = attr.vr
-    }
     return result
 }
 
