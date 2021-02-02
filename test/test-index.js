@@ -19,10 +19,10 @@ describe('index', async () => {
 
     it('exports', async () => {
         // Arrange
-        //const sourceUri = 'test/fixtures/CT1_UNC'
-        //const sourceUri = 'test/fixtures/CT1_UNC.implicit_little_endian.dcm'
-        //const sourceUri = 'test/fixtures/CT0012.explicit_little_endian.dcm'
-        //const sourceUri = 'test/fixtures/CT0012.fragmented_no_bot_jpeg_ls.80.dcm'
+        //const sourcePath = 'test/fixtures/CT1_UNC'
+        //const sourcePath = 'test/fixtures/CT1_UNC.implicit_little_endian.dcm'
+        //const sourcePath = 'test/fixtures/CT0012.explicit_little_endian.dcm'
+        //const sourcePath = 'test/fixtures/CT0012.fragmented_no_bot_jpeg_ls.80.dcm'
         const sourcePath = 'test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm'
         const readStream = fs.createReadStream(sourcePath);
         //const writeStream = fs.createWrite

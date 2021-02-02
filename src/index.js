@@ -27,7 +27,7 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
     const dataSet = dicomParser.parseDicom(buffer)
     console.timeEnd('parse dicom')
 
-    const inlinedDataSet = dataSetToIon(dataSet)
+    const ionDataSet = dataSetToIon(dataSet)
 
     const output = {
         sourceInfo,
@@ -36,7 +36,7 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
             sha256: digest,
             createdAt: timestampNow()
         },
-        dataSet: inlinedDataSet
+        dataSet: ionDataSet
     }
 
     //console.log(JSON.stringify(output, null, 4));

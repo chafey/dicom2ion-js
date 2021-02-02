@@ -2,82 +2,59 @@ const dicomParser = require('dicom-parser');
 const attrToIon = require('./attrToIon')
 const attrGroups = require('./attrGroups')
 const getVR = require('./getVR')
-const getKeyword = require('./getKeyword')
+const getKeyword = require('./getKeyword');
+const orderedAttributes = require('./orderedAttributes');
 
-const dataSetToIon = (dataSet, depth=0) => {
-    const ionDataSet = {
-        groups: {
-        },
-        standardAttrs: {},
-        privateAttrs: {},
-        vrs: {}
+const attributeToIon = (ionDataSet, vrs, tag, dataSet, attr) => {
+    // store vrs separately from attribute values
+    if(attr.vr) {
+        if (dicomParser.isPrivateTag(attr.tag)) {
+            vrs[tag] = attr.vr
+        }
+        const vr = getVR(attr)
+        if(vr === 'UN' || vr.includes('|')) {
+            vrs[tag] = attr.vr
+        }
     }
 
-    // add objects for each attribute group to the ionDataSet so we can control the order
-    Object.keys(attrGroups).map((key) => {
-        ionDataSet.groups[key] = {}
+    const keyword = getKeyword(attr)
+
+    if(dicomParser.isPrivateTag(attr.tag)) {
+        ionDataSet[tag] = attrToIon(dataSet, attr, dataSetToIon)
+    } else {
+        ionDataSet[keyword] = attrToIon(dataSet, attr, dataSetToIon)
+    }
+}
+
+const dataSetToIon = (dataSet) => {
+
+    const vrs = {}
+
+    const ionDataSet = {}
+   
+    // do ordered attributes first
+    orderedAttributes.map((tag) => {
+        const attr = dataSet.elements['x' + tag]
+        if(attr) {
+            attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
+        }
     })
-    
+
     // iterate through the attributes in the dataset and map them to ion
-    const sortedKeys = Object.keys(dataSet.elements).sort()
-    sortedKeys.map((key) => {
+    const keys = Object.keys(dataSet.elements)
+    keys.map((key) => {
         const attr = dataSet.elements[key]
-        //console.log('attr=',attr)
         const tag = attr.tag.substring(1) // trim leading 'x'
  
-        // store vrs separately from attribute values
-        if(attr.vr) {
-            if (dicomParser.isPrivateTag(attr.tag)) {
-                ionDataSet.vrs[tag] = attr.vr
-            }
-            const vr = getVR(attr)
-            if(vr === 'UN' || vr.includes('|')) {
-                ionDataSet.vrs[tag] = attr.vr
-            }
+        if(orderedAttributes.includes(tag)) {
+            return
         }
 
-        const keyword = getKeyword(attr)
-
-        // only normalize for root depth (not sequences)
-        let found = false
-        if(depth === 0) {
-            Object.keys(attrGroups).map((key) => {
-                const group = attrGroups[key]
-                if(group.has(tag)) {
-                    if(ionDataSet.groups[key] === undefined) {
-                        ionDataSet.groups[key] = {}
-                    }
-                    ionDataSet.groups[key][keyword] = attrToIon(dataSet, attr, dataSetToIon, depth)
-                    found = true
-                }
-            })
-        }
-
-        if(found === false) {
-            if(dicomParser.isPrivateTag(attr.tag)) {
-                ionDataSet.privateAttrs[tag] = attrToIon(dataSet, attr, dataSetToIon, depth)
-            } else {
-                ionDataSet.standardAttrs[keyword] = attrToIon(dataSet, attr, dataSetToIon, depth)
-            }
-        }
+        attributeToIon(ionDataSet, vrs, tag, dataSet, attr)
     })
 
-    if(Object.keys(ionDataSet.privateAttrs).length === 0){
-        delete ionDataSet.privateAttrs
-    }
-    if(Object.keys(ionDataSet.standardAttrs).length === 0){
-        delete ionDataSet.standardAttrs
-    }
-    if(Object.keys(ionDataSet.vrs).length === 0){
-        delete ionDataSet.vrs
-    }
-    Object.keys(ionDataSet.groups).map((key) => {
-        if(Object.keys(ionDataSet.groups[key]).length === 0){
-            delete ionDataSet.groups[key]
-        }
-    })
-    if(Object.keys(ionDataSet.groups).length === 0){
-        delete ionDataSet.groups
+    if(Object.keys(vrs).length != 0){
+        ionDataSet._vrs = vrs
     }
 
     return ionDataSet
