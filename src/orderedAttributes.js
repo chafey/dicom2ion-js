@@ -45,6 +45,7 @@ const orderedAttributes = [
     '00280103', //'PixelRepresentation'],
     '00280002', //'SamplesPerPixel'],
     '00020010', // TransferSyntaxUID
+    '00280008', // NumberOfFrames
     '7fe00010', // PixelData
 
     // Display Pipeline Related

@@ -140,7 +140,7 @@ const attrDataToIon = (dataSet, attr) => {
         case 'UT': 
             return attrStringDataToIon(dataSet, attr)
         default:
-            return attrDataRefToIon(dataSet, attr)
+            return attrBinaryToIon(dataSet, attr)
     }
 }
 

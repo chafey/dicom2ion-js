@@ -57,7 +57,7 @@ https://amzn.github.io/ion-docs/guides/why.html
 ```javascript
 {
   sourceInfo: {
-    uri: "file:///workspaces/dicom2ion-js/test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm"
+    uri: "file:///workspaces/dicom2ion-js/test/fixtures/CT0012.fragmented_no_bot_jpeg_ls.80.dcm"
   },
   options: {
     maximumInlineDataLength: 256,
@@ -68,7 +68,7 @@ https://amzn.github.io/ion-docs/guides/why.html
   },
   fileInfo: {
     sha256: "dc3ff8e550c833236bbee92d163762698b7b0b7b68a1af1b060243580741b7a6",
-    createdAt: 2021-02-02T10:28:42.849Z
+    createdAt: 2021-02-03T21:22:54.051Z
   },
   dataSet: {
     StudyInstanceUID: "1.3.6.1.4.1.5962.1.2.10.1166562673.14401",
@@ -105,25 +105,69 @@ https://amzn.github.io/ion-docs/guides/why.html
     PixelRepresentation: 0,
     SamplesPerPixel: 1,
     TransferSyntaxUID: "1.2.840.10008.1.2.4.80",
+    NumberOfFrames: "2",
     PixelData: {
       dataOffset: 3920,
-      length: 85608,
-      sha256: "fc003556dfa33c59e59a9575f2eb8ed4a7cb5349a7159d0abf85fd8ab7948a6b",
+      length: 85672,
+      sha256: "600138c2a369ce2d25dc0842c0a9f634bd8ad0ec09b208c067d020fc71b659bb",
       encapsulatedPixelData: true,
       basicOffsetTable: [
-        0,
-        46416
       ],
       fragments: [
         {
           offset: 0,
-          position: 3944,
-          length: 46408
+          position: 3936,
+          length: 8192
         },
         {
-          offset: 46416,
-          position: 50360,
-          length: 39160
+          offset: 8200,
+          position: 12136,
+          length: 8192
+        },
+        {
+          offset: 16400,
+          position: 20336,
+          length: 8192
+        },
+        {
+          offset: 24600,
+          position: 28536,
+          length: 8192
+        },
+        {
+          offset: 32800,
+          position: 36736,
+          length: 8192
+        },
+        {
+          offset: 41000,
+          position: 44936,
+          length: 5448
+        },
+        {
+          offset: 46456,
+          position: 50392,
+          length: 8192
+        },
+        {
+          offset: 54656,
+          position: 58592,
+          length: 8192
+        },
+        {
+          offset: 62856,
+          position: 66792,
+          length: 8192
+        },
+        {
+          offset: 71056,
+          position: 74992,
+          length: 8192
+        },
+        {
+          offset: 79256,
+          position: 83192,
+          length: 6392
         }
       ]
     },
@@ -214,7 +258,6 @@ https://amzn.github.io/ion-docs/guides/why.html
         FunctionalGroupPointer: "00209111"
       }
     ],
-    NumberOfFrames: "2",
     BurnedInAnnotation: "NO",
     RedPaletteColorLookupTableDescriptor: {{ZAAABBAA}},
     GreenPaletteColorLookupTableDescriptor: {{ZAAABBAA}},
