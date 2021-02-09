@@ -27,6 +27,7 @@ describe('index', async () => {
         //const sourcePath = 'test/fixtures/CT0012.not_fragmented_bot_jpeg_ls.80.dcm'
         //const sourcePath = 'test/fixtures/I_000025.dcm'
         //const sourcePath = 'test/fixtures/IM00001.implicit_little_endian.dcm'
+        //const sourcePath = 'test/fixtures/test-encapsulated-pdf.dcm'
         const readStream = fs.createReadStream(sourcePath);
         //const writeStream = fs.createWrite
 
