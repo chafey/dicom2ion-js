@@ -2064,6 +2064,7 @@ module.exports = {
     '00420012': {'tag': '00420012', 'vr': 'LO', 'vm': '1', 'name': 'MIMETypeOfEncapsulatedDocument'},
     '00420013': {'tag': '00420013', 'vr': 'SQ', 'vm': '1', 'name': 'SourceInstanceSequence'},
     '00420014': {'tag': '00420014', 'vr': 'LO', 'vm': '1-n', 'name': 'ListOfMIMETypes'},
+    '00420015': {'tag': '00420015', 'vr': 'UL', 'vm': '1', 'name': 'EncapsulatedDocumentLength'},
     '00440001': {'tag': '00440001', 'vr': 'ST', 'vm': '1', 'name': 'ProductPackageIdentifier'},
     '00440002': {'tag': '00440002', 'vr': 'CS', 'vm': '1', 'name': 'SubstanceAdministrationApproval'},
     '00440003': {'tag': '00440003', 'vr': 'LT', 'vm': '1', 'name': 'ApprovalStatusFurtherDescription'},
