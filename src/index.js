@@ -7,6 +7,22 @@ const getHash = require('./getHash')
 const fs = require('fs')
 const util = require('util')
 const timestampNow = require('./timestampNow')
+
+// NOTE - dicom-parser actually knows this but does not store/expose it - would be nice to modify
+// it someday so we don't need to do this
+const findLastP10HeaderAttribute = (dataSet) => {
+    const p10HeaderTags = Object.keys(dataSet.elements).filter(tag => tag.substr(1,4) === '0002')
+    const p10HeaderTagsReverseSorted = p10HeaderTags.sort().reverse()
+    return p10HeaderTagsReverseSorted[0]
+}
+
+const getDataSetOffset = (dataSet) => {
+    const lastP10HeaderTag = findLastP10HeaderAttribute(dataSet)
+    const lastP10HeaderAttribute = dataSet.elements[lastP10HeaderTag]
+    const dataSetOffset =  lastP10HeaderAttribute.dataOffset + lastP10HeaderAttribute.length
+    return dataSetOffset
+}
+
 /**
  * 
  * @param {*} readable - async iterator source
@@ -24,7 +40,7 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
 
     // parse the dicom file
     const dataSet = dicomParser.parseDicom(buffer)
-
+    
     const ionDataSet = dataSetToIon(dataSet, options)
 
     const output = {
@@ -32,7 +48,8 @@ const dicom2ion = async (readable, sourceInfo, options = defaultOptions) => {
         options,
         fileInfo: {
             sha256: digest,
-            createdAt: timestampNow()
+            createdAt: timestampNow(),
+            dataSetOffset: getDataSetOffset(dataSet)
         },
         dataSet: ionDataSet
     }
