@@ -16,6 +16,20 @@ Project Status: pre-release software, do not use yet
 Read more here:
 https://amzn.github.io/ion-docs/guides/why.html
 
+## Building
+
+This project uses Visual Studio Remote Containers to simplify setup and running (everything is contained in a docker image)
+
+```
+> npm install
+```
+
+Run the VS Code Build task or
+```
+> npm test
+```
+
+
 ## Design Thoughts:
 
 - Support async iterator as input so we can design for a full streaming implementation
