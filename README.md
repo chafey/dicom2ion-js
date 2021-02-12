@@ -20,15 +20,26 @@ https://amzn.github.io/ion-docs/guides/why.html
 
 This project uses Visual Studio Remote Containers to simplify setup and running (everything is contained in a docker image)
 
+This project uses git submodules to pull in the test data for unit tests.  If developing, initialize the git submodules first:
+
+```
+> $ git submodule update --init --recursive
+```
+
+Make sure you install npm dependencies:
+
 ```
 > npm install
 ```
 
-Run the VS Code Build task or
+To run the unit tests, run the VS Code Build task or run manually from cli:
 ```
 > npm test
 ```
 
+## Examples
+
+The examples/dicom2ion directory contains the source for a cli that will batch convert DICOM P10 to ION for a folder
 
 ## Design Thoughts:
 

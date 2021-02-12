@@ -1,0 +1,3 @@
+[submodule "extern/dagcom-test-data"]
+	path = extern/dagcom-test-data
+	url = https://github.com/chafey/dagcom-test-data.git
